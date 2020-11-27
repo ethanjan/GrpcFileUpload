@@ -1,4 +1,4 @@
-# Grpc Upload
+# GRPC File Upload
 Learning golang grpc-protobuff client-server implementation for uploading files.
 
 ## Implementation

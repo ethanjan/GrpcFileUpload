@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package ethanjan.grpcupload;
+
+message UploadImageRequest {
+  oneof data {
+    // The info struct consists of the image_type and the size of the image 
+    // that is being sent to the server.
+    ImageInfo info = 1;
+    // The chunk_data variable represents the bytes array of the chunk data
+    // that is being sent to the server.
+    bytes chunk_data = 2;
+  };
+}
+
+message ImageInfo {
+  // The image_type variable defines the type of image (as a string) that is being sent to the server.
+  string image_type = 1;
+  // The size variable defines the size of the image (as an int64) that is being uploaded to the server.
+  int64 size = 2;
+}
+
+message UploadImageResponse { 
+  // The id variable represents the universally unique identifier (as a string).
+  string id = 1; 
+  // The size variable defines the size of the image transfer (as an int64).
+  int64 size = 2;
+}
+
+// This is the grpc upload service.
+service UploadService {
+  rpc UploadImage(stream UploadImageRequest) returns (UploadImageResponse) {}
+}
